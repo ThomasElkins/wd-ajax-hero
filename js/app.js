@@ -72,13 +72,12 @@
             movieObj["title"] = searchArr[i]["Title"];
             movieObj["year"] = searchArr[i]["Year"]
             movies.push(movieObj);
-                var mPlot = searchArr[i]["imdbID"]
-                $.get("http://www.omdbapi.com/?i=" + mPlot +"&apikey=702b3bb5", function(plotData){
-                  var moviePlots = {};
-                  moviePlots["plot"] = plotData["Plot"];
-                  console.log(moviePlots);
-                  renderMovies();
-                  movies.push(moviePlots);
+            var mPlot = movieObj["id"]
+            $.get("http://www.omdbapi.com/?i=" + mPlot +"&apikey=702b3bb5", function(plotData){
+                  movieObj["plot"] = plotData["Plot"]
+                  // movies.push(plotData)
+                  // console.log(plotData["Plot"])
+                  console.log(movieObj)
                 })
                 renderMovies();
           }
@@ -87,3 +86,38 @@
     });
 
 })();
+
+
+
+
+
+
+
+
+
+
+// var $search = $('#search');
+//
+// var $button = $('button');
+//
+// $button.click(function(event) {
+// event.preventDefault();
+// var $movie = $search.val();
+// var $xhr = $.get(`http://www.omdbapi.com/?s=${$movie}&apikey=702b3bb5`);
+// $xhr.done(function(movie) {
+// if ($xhr.status !== 200) return;
+//
+// for (var i = 0; i < movie.Search.length; i++) {
+//   var $id = movie.Search[i].imdbID;
+//   var $moreXhr = $.get(`http://www.omdbapi.com/?i=${$id}&apikey=702b3bb5`);
+//   $moreXhr.done(function(m) {
+//   console.log(m);
+//   movies.push(m);
+//   renderMovies();
+// });
+// }
+// movies.length = 0;
+// });
+//
+// });
+// })();
