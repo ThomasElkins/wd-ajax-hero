@@ -72,9 +72,16 @@
             movieObj["title"] = searchArr[i]["Title"];
             movieObj["year"] = searchArr[i]["Year"]
             movies.push(movieObj);
+                var mPlot = searchArr[i]["imdbID"]
+                $.get("http://www.omdbapi.com/?i=" + mPlot +"&apikey=702b3bb5", function(plotData){
+                  var moviePlots = {};
+                  moviePlots["plot"] = plotData["Plot"];
+                  console.log(moviePlots);
+                  renderMovies();
+                  movies.push(moviePlots);
+                })
+                renderMovies();
           }
-
-          renderMovies();
         });
       }
     });
